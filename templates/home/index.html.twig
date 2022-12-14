@@ -1,52 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<h1 class="fs-3 mb-5">Prochaines fermetures du pont Chaban Delmas
+	</h1>
+	<p>Nous sommes aujourd'hui le :
+		{{today}}
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Nom du bateau</th>
+				<th scope="col">Fermeture</th>
+				<th scope="col">Ré-ouverture</th>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/valerieielsch/trainingWebDev/testTechDotsafe/pont-chaban/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/valerieielsch/trainingWebDev/testTechDotsafe/pont-chaban/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-
-    <h1>Hello
-</h1>
-<table class="table">
-	<thead>
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col">First</th>
-			<th scope="col">Last</th>
-			<th scope="col">Handle</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th scope="row">1</th>
-			<td>Mark</td>
-			<td>Otto</td>
-			<td>@mdo</td>
-		</tr>
-		<tr>
-			<th scope="row">2</th>
-			<td>Jacob</td>
-			<td>Thornton</td>
-			<td>@fat</td>
-		</tr>
-		<tr>
-			<th scope="row">3</th>
-			<td colspan="2">Larry the Bird</td>
-			<td>@twitter</td>
-		</tr>
-	</tbody>
-</table>
-</div>
-{% endblock %}
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">Serina</th>
+				<td>Le 12 décembre à 23:00</td>
+				<td>Le 13 décembre à 05:00</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Jacob</td>
+				<td>Thornton</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td colspan="2">Larry the Bird</td>
+			</tr>
+		</tbody>
+	</table>
+</div>{% endblock %}

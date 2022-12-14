@@ -19,7 +19,12 @@
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		{% endblock %}
 	</head>
+	<nav>
+		{% include 'components/_navbar.html.twig' %}
+	</nav>
 	<body>
-		{% block body %}{% endblock %}
-	</body>
-</html>
+		<div class="container mt-5"> {% block body %}{% endblock %}
+			</div>
+
+		</body>
+	</html>
