@@ -12,10 +12,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(CallApi $callApi): Response
     {
-
-        dd($callApi->getAllDatas());
+        $datas = $callApi->getAllDatas();
         $today = mktime(11, 14, 54, 7, 22, 2022);
         $today =  date("d M Y,  h:i a", $today);
-        return $this->render('home/index.html.twig', ['today' => $today]);
+        return $this->render('home/index.html.twig', ['today' => $today, 'datas' => $datas['records']]);
     }
 }

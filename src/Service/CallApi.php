@@ -16,7 +16,7 @@ class CallApi
     {
         $response = $this->client->request(
             'GET',
-            'https://opendata.bordeaux-metropole.fr/api/records/1.0/search/?dataset=previsions_pont_chaban&q=&facet=bateau'
+            'https://opendata.bordeaux-metropole.fr/api/records/1.0/search/?dataset=previsions_pont_chaban&q=&rows=100&facet=bateau'
         );
         return $response->toArray();
     }

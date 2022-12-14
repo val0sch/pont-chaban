@@ -9,30 +9,30 @@
 	<p>Nous sommes aujourd'hui le :
 		{{today}}
 	</p>
+
+
 	<table class="table">
 		<thead>
 			<tr>
 				<th scope="col">Nom du bateau</th>
-				<th scope="col">Fermeture</th>
-				<th scope="col">Ré-ouverture</th>
+				<th scope="col">Date de fermeture</th>
+				<th scope="col">Heure de fermeture</th>
+				<th scope="col">Heure de ré-ouverture</th>
 
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">Serina</th>
-				<td>Le 12 décembre à 23:00</td>
-				<td>Le 13 décembre à 05:00</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td colspan="2">Larry the Bird</td>
-			</tr>
-		</tbody>
+		{% for data in datas %}
+			<tbody>
+				<tr>
+					<td>{{data.fields.bateau}}</td>
+					<th scope="row">
+						{{data.fields.date_passage|format_datetime('full', 'none', locale='fr')}}
+					</th>
+					<td>{{data.fields.fermeture_a_la_circulation}}</td>
+					<td>
+						{{data.fields.re_ouverture_a_la_circulation}}</td>
+				</tr>
+			</tbody>
+		{% endfor %}
 	</table>
 </div>{% endblock %}
