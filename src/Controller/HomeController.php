@@ -10,11 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(CallApi $callApi): Response
+    public function index(CallApi $callApi,): Response
     {
-        $datas = $callApi->getAllDatas();
+        $arrayNewDatas = $callApi->reOpeningDate();
+
         $today = mktime(11, 14, 54, 7, 22, 2022);
         $today =  date("d M Y,  h:i a", $today);
-        return $this->render('home/index.html.twig', ['today' => $today, 'datas' => $datas['records']]);
+        return $this->render('home/index.html.twig', ['today' => $today, 'datas' => $arrayNewDatas]);
     }
 }

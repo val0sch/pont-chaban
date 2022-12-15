@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}Horaires de fermeture du Pont Chaban Delmas
 {% endblock %}
 
 {% block body %}
@@ -9,30 +9,38 @@
 	<p>Nous sommes aujourd'hui le :
 		{{today}}
 	</p>
-
-
 	<table class="table">
-		<thead>
+		<thead class="bg-light">
 			<tr>
 				<th scope="col">Nom du bateau</th>
 				<th scope="col">Date de fermeture</th>
 				<th scope="col">Heure de fermeture</th>
+				<th scope="col">Date de ré-ouverture</th>
 				<th scope="col">Heure de ré-ouverture</th>
 
 			</tr>
 		</thead>
+		{# {% for date in reOpeningDates %} #}
 		{% for data in datas %}
+
 			<tbody>
-				<tr>
-					<td>{{data.fields.bateau}}</td>
-					<th scope="row">
-						{{data.fields.date_passage|format_datetime('full', 'none', locale='fr')}}
-					</th>
-					<td>{{data.fields.fermeture_a_la_circulation}}</td>
-					<td>
-						{{data.fields.re_ouverture_a_la_circulation}}</td>
-				</tr>
+				<td>{{data.fields.bateau}}</td>
+				<th scope="row">
+					{{data.fields.date_passage|format_datetime('full', 'none', locale='fr')}}
+
+				</th>
+				<td>{{data.fields.fermeture_a_la_circulation}}</td>
+				<td scope="row">{{data.fields.date_ouverture|format_datetime('full', 'none', locale='fr')}}
+
+				</td>
+
+				<td>
+					{{data.fields.re_ouverture_a_la_circulation}}</td>
+
+
 			</tbody>
+			{# {% endfor %} #}
 		{% endfor %}
+
 	</table>
 </div>{% endblock %}
