@@ -29,7 +29,7 @@ class ReopeningGate
             $data['fields']['date_ouverture'] = $openingDate;
             $newDatas[] = $data;
         }
-        dd($newDatas);
+
         return $newDatas;
     }
 }
