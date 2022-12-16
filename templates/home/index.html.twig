@@ -9,7 +9,7 @@
 	<p>Nous sommes aujourd'hui le :
 		{{today}}
 	</p>
-	<table class="table">
+	<table style="font-size: 12px;" class="table">
 		<thead class="bg-light">
 			<tr>
 				<th scope="col">Nom du bateau</th>
@@ -22,9 +22,15 @@
 		</thead>
 		{# {% for date in reOpeningDates %} #}
 		{% for data in datas %}
+			{% if data.fields.bateau is same as 'MAINTENANCE' %}
+				{% set color = '#f78a8a' %}
+			{% else %}
+				{% set color = '#00' %}
+
+			{% endif %}
 
 			<tbody>
-				<td>{{data.fields.bateau}}</td>
+				<td style="background: {{color}}">{{data.fields.bateau}}</td>
 				<th scope="row">
 					{{data.fields.date_passage|format_datetime('full', 'none', locale='fr')}}
 
