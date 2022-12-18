@@ -8,10 +8,14 @@ class DateService
 {
     public function createFictiveDate()
     {
-        $today = mktime(13, 14, 54, 10, 10, 2022);
+        $today = mktime(13, 14, 54, 2, 10, 2022);
         return $today;
     }
 
+    // Cette fonction retourne un tableau avec un nouveau champ pour la date de réouverture
+    // une condition est créée pour ajouter un jour à la date de passage lorsque nécessaire
+    // Elle ajoute également un champ pour avoir la date en timestamp que j'utilise ensuite 
+    // pour ordonner le tableau par ordre chronologique
     public function reOpeningDate($array): array
     {
         $endOfDay = "23:59";
@@ -41,5 +45,4 @@ class DateService
 
         return $newDatas;
     }
-
 }

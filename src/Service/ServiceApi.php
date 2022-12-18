@@ -12,7 +12,8 @@ class ServiceApi
         $this->client = $client;
     }
 
-    private function getApi()
+    // Cette fonction retourne un tableau qui contient toutes les données de l'Api
+    private function getApi(): array
     {
         $response = $this->client->request(
             'GET',
@@ -22,7 +23,9 @@ class ServiceApi
         return $response->toArray();
     }
 
-    public function getAllDatas()
+
+    // Cette fonction retourne un tableau qui contient toutes les données traitées pour l'affichage
+    public function getAllDatas(): array
     {
         //Je récupère les données de l'API
         $datas = $this->getApi()['records'];
@@ -44,15 +47,14 @@ class ServiceApi
         $newDatas = new DateService();
         $newDatas = $newDatas->reOpeningDate($arrayNewDatas);
 
-        // Je trie par ordre croissant selon la date de passage
+        // Je trie par ordre chronologique selon la date de passage
         $sortedDatas = $this->sortArrayMulti($newDatas, 'date_timestamp');
 
-        // Je retourne le tableau qui contient toutes les nouvelles données
         return $sortedDatas;
     }
 
     //Fonction pour trier un tableau multi-dimensionnel via une clé
-    public function sortArrayMulti($array, $key)
+    public function sortArrayMulti($array, $key): array
     {
         $keys = array_column($array, $key);
         array_multisort($keys, SORT_ASC, $array);

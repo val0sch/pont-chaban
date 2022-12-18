@@ -15,24 +15,24 @@ class HomeController extends AbstractController
     public function index(ServiceApi $serviceApi, DateService $dateService): Response
     {
 
-
-        // Je récupère le tableau de données trié par ordre croissant (date)
+        // $data récupère le tableau de données trié par ordre chronologique
         $datas = $serviceApi->getAllDatas();
 
-        // Je récupère le premier élement du tableau qui sera la prochaine date de fermeture
-        $nextclosing = $datas[0]['date_passage'];
-        //Je recupère la date fictive
+        // $nextclosing récupère le premier élement du tableau qui sera la prochaine date de fermeture
+        $nextclosing = $datas[0]['date_timestamp'];
+
+        //On recupère la date fictive
         $fictiveDate = $dateService->createFictiveDate();
-        $dateAndTime =  date("d M Y,  h:i a", $fictiveDate);
-        $today = date("Y-m-d", $fictiveDate);
+        $today =  date("d M Y,  h:i a", $fictiveDate);
+        $nextclosing =  date("d M Y,  h:i a", $nextclosing);
 
-        //Je récupère dans la variable $interval le nombre de jour s'écoulant
+        // La variable $interval récupère le nombre de jour s'écoulant
         //  entre la date fictive $today et la prochaine fermeture $nextclosing
-        $today = new DateTime($today);
+        $dateAndTime = new DateTime($today);
         $nextclosing = new DateTime($nextclosing);
-        $interval = $today->diff($nextclosing);
-        $interval = $interval->format('%d jours');
+        $interval = $dateAndTime->diff($nextclosing);
+        $interval = $interval->format('%d jours %h heures %i minutes %s secondes');
 
-        return $this->render('home/index.html.twig', ['today' => $dateAndTime, 'datas' => $datas, 'interval' => $interval]);
+        return $this->render('home/index.html.twig', ['today' => $today, 'datas' => $datas, 'interval' => $interval]);
     }
 }
