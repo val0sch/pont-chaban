@@ -28,7 +28,7 @@ class ServiceApi
         $datas = $this->getApi()['records'];
 
         //J'attribue à une variable $today une date fictive 
-        $today = new FictiveDate();
+        $today = new DateService();
         $today = $today->createFictiveDate();
         $today =  date("Y-m-d", $today);
 
@@ -51,6 +51,7 @@ class ServiceApi
         return $sortedDatas;
     }
 
+    //Fonction pour trier un tableau multi-dimensionnel via une clé
     public function sortArrayMulti($array, $key)
     {
         $keys = array_column($array, $key);
