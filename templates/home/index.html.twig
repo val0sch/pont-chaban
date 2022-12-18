@@ -11,8 +11,22 @@
 	<p>Prochaine fermeture du pont dans :
 		{{interval}}.</p>
 </p>
+<form action="">
+	<label for="raison">Filtrer par raison / bateau :
+	</label>
+	<select name="" id="">
+		<option value="">Choix</option>
+		{% for reason in selectReasonArray %}
+			<option value="">{{reason}}</option>
+		{% endfor %}
+	</select>
 
-{# <img src="{{ asset('images/pont2.jpeg') }}" width="200px"> #}
+	<button class="btn btn-outline-primary btn-sm" type="submit">
+		<i class="bi bi-search"></i>
+	</button>
+
+</form>
+
 <table style="font-size: 12px;" class="table">
 	<thead class="bg-dark text-light">
 		<tr>
@@ -23,7 +37,8 @@
 			<th scope="col">Heure de ré-ouverture</th>
 		</tr>
 	</thead>
-	{# {% for date in reOpeningDates %} #}
+
+
 	{% for data in datas %}
 		{% if data.bateau is same as 'MAINTENANCE' %}
 			{% set color = '#f7afaf' %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\DateService;
+use App\Service\FilterService;
 use App\Service\ServiceApi;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(ServiceApi $serviceApi, DateService $dateService): Response
+    public function index(ServiceApi $serviceApi, DateService $dateService, FilterService $filterService): Response
     {
 
         // $data récupère le tableau de données trié par ordre chronologique
@@ -33,6 +34,11 @@ class HomeController extends AbstractController
         $interval = $dateAndTime->diff($nextclosing);
         $interval = $interval->format('%d jours %h heures %i minutes %s secondes');
 
-        return $this->render('home/index.html.twig', ['today' => $today, 'datas' => $datas, 'interval' => $interval]);
+
+        // Filter
+        $selectReasonArray = $filterService->selectReason($datas);
+
+
+        return $this->render('home/index.html.twig', ['today' => $today, 'datas' => $datas, 'interval' => $interval, 'selectReasonArray' => $selectReasonArray]);
     }
 }
