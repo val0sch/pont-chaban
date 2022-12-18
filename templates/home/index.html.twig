@@ -1,69 +1,83 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Horaires de fermeture du Pont Chaban Delmas
+{% block title %}Horaires de fermeture du Pont Chaban-Delmas
 {% endblock %}
 
-{% block body %}
-	<h1 class="fs-3 mb-5">Dates de fermetures du pont Chaban Delmas
+{% block header %}
+	<h1 class=" p-5 bg-dark text-center text-light m-0">Pont Chaban-Delmas
 	</h1>
-	<p>Nous sommes aujourd'hui le
-		{{today|format_datetime('full', 'none', locale='fr')}}.</p>
-	<p>Prochaine fermeture du pont dans :
-		{{interval}}.</p>
-</p>
-<form action="">
-	<label for="raison">Filtrer par raison / bateau :
-	</label>
-	<select name="" id="">
-		<option value="">Choix</option>
-		{% for reason in selectReasonArray %}
-			<option value="">{{reason}}</option>
+	<div class="bg-light m-2 p-2 pe-5 me-5">
+		<p class="text-end">Nous sommes aujourd'hui le
+			{{today|format_datetime('full', 'none', locale='fr')}}</p>
+
+		<p class="text-end">Prochaine fermeture dans :
+			{{interval}}</p>
+
+	</div>
+{% endblock %}
+{% block body %}
+
+	<form action="" class="mt-3 mb-3">
+		<div class="row">
+
+			<div class="col col-sm">
+				<label for="raison">Filtrer par raison / bateau :
+				</label>
+				<select name="" id="">
+					<option value="">Choix</option>
+					{% for reason in selectReasonArray %}
+						<option value="">{{reason}}</option>
+					{% endfor %}
+				</select>
+
+				<button class="btn btn-outline-primary btn-sm" type="submit">
+					<i class="bi bi-search"></i>
+				</button>
+			</div>
+			<div class="col col-sm"></div>
+		</div>
+
+
+	</form>
+
+	<table style="font-size: 12px;" class="table">
+		<thead class="bg-dark text-light">
+			<tr>
+				<th scope="col">Nom du bateau</th>
+				<th scope="col">Date de fermeture</th>
+				<th scope="col">Heure de fermeture</th>
+				<th scope="col">Date de ré-ouverture</th>
+				<th scope="col">Heure de ré-ouverture</th>
+			</tr>
+		</thead>
+
+
+		{% for data in datas %}
+			{% if data.bateau is same as 'MAINTENANCE' %}
+				{% set color = '#f7afaf' %}
+			{% else %}
+				{% set color = '#00' %}
+
+			{% endif %}
+
+			<tbody>
+				<td style="background: {{color}}">{{data.bateau}}</td>
+				<th style="background: {{color}} " scope="row">
+					{{data.date_passage|format_datetime('full', 'none', locale='fr')}}
+
+				</th>
+				<td style="background: {{color}}">{{data.fermeture_a_la_circulation}}</td>
+				<td style="background:{{color}}" scope="row">{{data.date_ouverture|format_datetime('full', 'none', locale='fr')}}
+
+				</td>
+
+				<td style="background: {{color}}">
+					{{data.re_ouverture_a_la_circulation}}</td>
+
+
+			</tbody>
+			{# {% endfor %} #}
 		{% endfor %}
-	</select>
 
-	<button class="btn btn-outline-primary btn-sm" type="submit">
-		<i class="bi bi-search"></i>
-	</button>
-
-</form>
-
-<table style="font-size: 12px;" class="table">
-	<thead class="bg-dark text-light">
-		<tr>
-			<th scope="col">Nom du bateau</th>
-			<th scope="col">Date de fermeture</th>
-			<th scope="col">Heure de fermeture</th>
-			<th scope="col">Date de ré-ouverture</th>
-			<th scope="col">Heure de ré-ouverture</th>
-		</tr>
-	</thead>
-
-
-	{% for data in datas %}
-		{% if data.bateau is same as 'MAINTENANCE' %}
-			{% set color = '#f7afaf' %}
-		{% else %}
-			{% set color = '#00' %}
-
-		{% endif %}
-
-		<tbody>
-			<td style="background: {{color}}">{{data.bateau}}</td>
-			<th style="background: {{color}} " scope="row">
-				{{data.date_passage|format_datetime('full', 'none', locale='fr')}}
-
-			</th>
-			<td style="background: {{color}}">{{data.fermeture_a_la_circulation}}</td>
-			<td style="background:{{color}}" scope="row">{{data.date_ouverture|format_datetime('full', 'none', locale='fr')}}
-
-			</td>
-
-			<td style="background: {{color}}">
-				{{data.re_ouverture_a_la_circulation}}</td>
-
-
-		</tbody>
-		{# {% endfor %} #}
-	{% endfor %}
-
-</table></div>{% endblock %}
+	</table>
+</div>{% endblock %}
