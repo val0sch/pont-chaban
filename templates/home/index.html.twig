@@ -4,50 +4,50 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="fs-3 mb-5">Prochaines fermetures du pont Chaban Delmas
+	<h1 class="fs-3 mb-5">Dates de fermetures du pont Chaban Delmas
 	</h1>
 	<p>Nous sommes aujourd'hui le :
-		{{today}}, le pont se fermera dans
-		{{interval}}
-	</p>
-	<table style="font-size: 12px;" class="table">
-		<thead class="bg-light">
-			<tr>
-				<th scope="col">Nom du bateau</th>
-				<th scope="col">Date de fermeture</th>
-				<th scope="col">Heure de fermeture</th>
-				<th scope="col">Date de ré-ouverture</th>
-				<th scope="col">Heure de ré-ouverture</th>
+		{{today}}.</p>
+	<p>Prochaine fermeture du pont dans
+		{{interval}}.</p>
+</p>
+<table style="font-size: 12px;" class="table">
+	<thead class="bg-light">
+		<tr>
+			<th scope="col">Nom du bateau</th>
+			<th scope="col">Date de fermeture</th>
+			<th scope="col">Heure de fermeture</th>
+			<th scope="col">Date de ré-ouverture</th>
+			<th scope="col">Heure de ré-ouverture</th>
 
-			</tr>
-		</thead>
-		{# {% for date in reOpeningDates %} #}
-		{% for data in datas %}
-			{% if data.fields.bateau is same as 'MAINTENANCE' %}
-				{% set color = '#f78a8a' %}
-			{% else %}
-				{% set color = '#00' %}
+		</tr>
+	</thead>
+	{# {% for date in reOpeningDates %} #}
+	{% for data in datas %}
+		{% if data.bateau is same as 'MAINTENANCE' %}
+			{% set color = '#f78a8a' %}
+		{% else %}
+			{% set color = '#00' %}
 
-			{% endif %}
+		{% endif %}
 
-			<tbody>
-				<td style="background: {{color}}">{{data.fields.bateau}}</td>
-				<th scope="row">
-					{{data.fields.date_passage|format_datetime('full', 'none', locale='fr')}}
+		<tbody>
+			<td style="background: {{color}}">{{data.bateau}}</td>
+			<th scope="row">
+				{{data.date_passage|format_datetime('full', 'none', locale='fr')}}
 
-				</th>
-				<td>{{data.fields.fermeture_a_la_circulation}}</td>
-				<td scope="row">{{data.fields.date_ouverture|format_datetime('full', 'none', locale='fr')}}
+			</th>
+			<td>{{data.fermeture_a_la_circulation}}</td>
+			<td scope="row">{{data.date_ouverture|format_datetime('full', 'none', locale='fr')}}
 
-				</td>
+			</td>
 
-				<td>
-					{{data.fields.re_ouverture_a_la_circulation}}</td>
+			<td>
+				{{data.re_ouverture_a_la_circulation}}</td>
 
 
-			</tbody>
-			{# {% endfor %} #}
-		{% endfor %}
+		</tbody>
+		{# {% endfor %} #}
+	{% endfor %}
 
-	</table>
-</div>{% endblock %}
+</table></div>{% endblock %}
